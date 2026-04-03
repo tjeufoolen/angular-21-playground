@@ -1,0 +1,26 @@
+@use 'colors';
+@use 'spacing';
+@use 'borders';
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: spacing.$medium;
+    margin: spacing.$medium;
+    
+    section, aside {
+        border-radius: borders.$radius;
+        padding: spacing.$medium;
+    }
+
+    section {
+        background-color: colors.$yellow;
+        width: 100%;
+    }
+
+    aside {
+        background-color: colors.$orange;
+        width: 20%;
+        min-width: 300px;
+    }
+}

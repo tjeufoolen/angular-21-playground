@@ -1,0 +1,31 @@
+@use 'colors';
+@use 'spacing';
+
+nav {
+    background-color: colors.$light-yellow;
+
+    ul {
+        list-style: none;
+        display: flex;
+        gap: spacing.$medium;
+        padding: spacing.$medium;
+        justify-content: center;
+        margin: 0;
+
+        li {
+            a {
+                text-decoration: none;
+                font-weight: bold;
+                color: colors.$yellow;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &.active {
+                    color: colors.$orange;
+                }
+            }
+        }
+    }
+}
