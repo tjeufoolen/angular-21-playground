@@ -3,6 +3,10 @@
 
 nav {
     background-color: colors.$light-yellow;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 spacing.$medium;
 
     ul {
         list-style: none;

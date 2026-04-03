@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { ShoppingStateService } from '../shopping-state.service';
-import { WinkelwagenStateComponent } from '../states/winkelwagen/winkelwagen.state.component';
 
 @Component({
   selector: 'app-shop',
-  imports: [NgComponentOutlet, WinkelwagenStateComponent],
+  imports: [NgComponentOutlet],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
 })
