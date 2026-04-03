@@ -9,7 +9,12 @@ import { BevestigdStateComponent } from '../bevestigd/bevestigd.state.component'
   styleUrl: './bevestigen.state.component.scss',
 })
 export class BevestigenStateComponent extends StateComponent {
+  terug(): void {
+    this.shoppingStateService.revertToPreviousState();
+  }
+
   plaatsBestelling() {
     this.shoppingStateService.setCurrentState(BevestigdStateComponent);
+    this.shoppingStateService.clearHistory();
   }
 }

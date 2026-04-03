@@ -9,6 +9,10 @@ import { BevestigenStateComponent } from '../bevestigen/bevestigen.state.compone
   styleUrl: './betaal-methode.state.component.scss',
 })
 export class BetaalMethodeStateComponent extends StateComponent {
+  terug(): void {
+    this.shoppingStateService.revertToPreviousState();
+  }
+
   volgende(): void {
     this.shoppingStateService.setCurrentState(BevestigenStateComponent);
   }

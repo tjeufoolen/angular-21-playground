@@ -9,6 +9,10 @@ import { BetaalMethodeStateComponent } from '../betaal-methode/betaal-methode.st
   styleUrl: './verzendgegevens.state.component.scss',
 })
 export class VerzendgegevensStateComponent extends StateComponent {
+  terug(): void {
+    this.shoppingStateService.revertToPreviousState();
+  }
+
   volgende(): void {
     this.shoppingStateService.setCurrentState(BetaalMethodeStateComponent);
   }
