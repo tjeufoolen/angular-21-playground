@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@use "borders";
+@use "colors";
+@use "effects";
+@use "spacing";
+
 * {
     font-family: sans-serif;
 }
@@ -12,4 +17,26 @@ html, body {
 body {
     height: 100vh;
     width: 100vw;
+}
+
+button {
+    background-color: colors.$blue;
+    color: colors.$white;
+    border: none;
+    border-radius: borders.$radius;
+    padding: spacing.$small spacing.$medium;
+    font-weight: bold;
+
+    @include effects.shadow-on-hover;
+    @include effects.darken-background-on-hover(colors.$blue);
+    
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.secondary {
+        background-color: colors.$white;
+        color: colors.$blue;
+        @include effects.darken-background-on-hover(colors.$white);
+    }
 }
