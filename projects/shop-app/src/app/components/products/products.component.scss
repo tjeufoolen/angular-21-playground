@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin: 1rem;
+
+    section, aside {
+        border-radius: 6px;
+        padding: 1rem;
+    }
+
+    section {
+        background-color: white;
+        width: 100%;
+    }
+
+    aside {
+        background-color: white;
+        width: 20%;
+        min-width: 300px;
+    }
+}
