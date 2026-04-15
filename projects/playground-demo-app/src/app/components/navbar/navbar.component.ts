@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { APP_NAME } from '../../tokens';
 import { RouterModule } from '@angular/router';
 
@@ -11,8 +11,8 @@ import { RouterModule } from '@angular/router';
 export class NavbarComponent {
 	protected readonly appName = inject(APP_NAME);
 
-	protected readonly links = [
+	protected readonly menuItems = signal([
 		{ path: '/', name: 'Home' },
 		{ path: '/shop', name: 'Shop' },
-	];
+	]);
 }

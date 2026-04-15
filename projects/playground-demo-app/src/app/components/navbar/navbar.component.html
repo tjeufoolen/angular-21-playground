@@ -1,9 +1,9 @@
 <nav>
 	<h1>{{ appName }}</h1>
 	<ul>
-		@for (link of links; track link.path) {
+		@for (menuItem of menuItems(); track menuItem.path) {
 			<li>
-				<a [routerLink]="link.path">{{ link.name }}</a>
+				<a [routerLink]="menuItem.path">{{ menuItem.name }}</a>
 			</li>
 		}
 	</ul>
