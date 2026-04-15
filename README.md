@@ -1,23 +1,90 @@
-# Angular21Playground
+# Angular 21 Playground - Module Federation
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+This is a monorepo featuring multiple Angular 21 applications connected through **Module Federation** using [@angular-architects/native-federation](https://www.npmjs.com/package/@angular-architects/native-federation). The architecture demonstrates micro frontend patterns with standalone components and shared dependencies.
 
-## Development server
+## Project Structure
 
-To start a local development server, run:
+- **playground-demo-app**: The main shell application that serves as the entry point
+- **shop-app**: A federated module providing shopping functionality, loaded dynamically into the shell
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js v20+
+- npm v11+
+
+### Installation
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Development
+
+### Starting the Development Servers
+
+To run both applications in development mode with module federation, run the commands below each in their own shell:
+
+```bash
+npm start shop-app
+npm start playground-demo-app
+```
+
+This starts both projects. By default:
+
+- **playground-demo-app** runs on `http://localhost:4200/`
+- **shop-app** runs on `http://localhost:4201/` (automatically managed by module federation)
+
+````bash
+The applications will automatically reload whenever you modify any source files.
+
+## Module Federation Architecture
+
+### Shared Dependencies
+
+Both applications share the following dependencies at the singleton level:
+- Angular core packages (`@angular/core`, `@angular/common`, `@angular/forms`, etc.)
+- RxJS
+- Custom tokens and configuration
+
+This is managed by the `withNativeFederation` configuration in each app's `federation.config.js`.
+
+### Shop App Module
+
+The **shop-app** exposes its routes for dynamic loading:
+
+```typescript
+// Exposed via federation.config.js
+exposes: {
+  './routes': './projects/shop-app/src/app/app.routes.ts'
+}
+````
+
+The shell app dynamically loads these routes:
+
+```typescript
+// In playground-demo-app app.routes.ts
+{
+  path: 'shop',
+  loadChildren: () =>
+    loadRemoteModule({ remoteName: 'shopApp', exposedModule: './routes' })
+      .then((m) => m.routes),
+}
+```
 
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
 ```bash
-ng generate component component-name
+ng generate component component-name --project=playground-demo-app
+```
+
+Or for the shop app:
+
+```bash
+ng generate component component-name --project=shop-app
 ```
 
 For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
@@ -28,32 +95,58 @@ ng generate --help
 
 ## Building
 
-To build the project run:
+To build all projects for production:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This compiles all projects and stores build artifacts in the `dist/` directory. Each federated module is built independently, allowing for separate deployments.
+
+Build a specific project:
+
+```bash
+ng build playground-demo-app --configuration production
+ng build shop-app --configuration production
+```
 
 ## Running unit tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+To execute unit tests with [Vitest](https://vitest.dev/):
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Or run tests for a specific project:
 
 ```bash
-ng e2e
+ng test playground-demo-app
+ng test shop-app
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Technology Stack
+
+- **Angular**: v21.2+
+- **TypeScript**: ~5.9
+- **RxJS**: ~7.8
+- **Build Tool**: esbuild with native-federation
+- **Testing**: Vitest
+- **Module Federation**: @angular-architects/native-federation
+
+## Best Practices
+
+This project follows Angular best practices:
+
+- Standalone components (no NgModules)
+- Signals for state management
+- Lazy loading of routes and federated modules
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For more information:
+
+- [Angular CLI Documentation](https://angular.dev/tools/cli)
+- [Angular Architects Native Federation](https://github.com/angular-architects/native-federation)
+- [Module Federation Webpack Documentation](https://webpack.js.org/concepts/module-federation/)
+- [Angular Architecture Best Practices](https://angular.dev/)

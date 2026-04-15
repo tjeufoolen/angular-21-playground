@@ -1,8 +1,0 @@
-<nav>
-    <h1>Angular 21 Playground</h1>
-    <ul>
-        @for (route of routes; track route.path) {
-            <li><a [routerLink]="route.path">{{ route.data?.title }}</a></li>
-        }
-    </ul>
-</nav>

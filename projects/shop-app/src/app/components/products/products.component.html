@@ -1,0 +1,10 @@
+<div class="container">
+	<section>
+		<h2>Shop</h2>
+		<p>Welkom in the shop! Here you can find our latest product to order.</p>
+	</section>
+
+	<aside>
+		<ng-container [ngComponentOutlet]="shoppingStateService.current() ?? null" />
+	</aside>
+</div>

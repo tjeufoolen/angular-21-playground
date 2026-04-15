@@ -13,12 +13,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve",
-    "paths": {
-      "app/*": ["./src/app/*"],
-      "features/*": ["./src/app/features/*"],
-      "shared/*": ["./src/app/shared/*"],
-    }
+    "module": "preserve"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -29,10 +24,16 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./projects/playground-demo-app/tsconfig.app.json"
     },
     {
-      "path": "./tsconfig.spec.json"
+      "path": "./projects/playground-demo-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/shop-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/shop-app/tsconfig.spec.json"
     }
   ]
 }
